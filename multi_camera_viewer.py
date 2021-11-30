@@ -2,9 +2,9 @@
 
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
+from test import Ui_MainWindow
 
-from ui_mainwindow import Ui_MainWindow
-
+QtCore.QTh
 class MultiCameraViewer(QtWidgets.QMainWindow):
     def __init__(self) -> None:
         super().__init__()
@@ -12,14 +12,17 @@ class MultiCameraViewer(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.ui.retranslateUi(self)
 
-        # self.ui.opencamera.clicked.connect(self.open_camera)
+        self.ui.pushButton.clicked.connect(self.open_camera)
         # self.show()
     
     # def open_camera():
-    #     camera = 
-    #     analyz_thread=QThread()
-    #     camera.moveToThread(self.analyz_thread)
-    #     self.analyz_thread.started.connect(self.analyze.analyz_work)
+    #     camera = uvc_camera()
+    #     camera.analyze_thread=QThread()
+    #     camera.moveToThread(self.analyze_thread)
+    #     self.analyze_thread.started.connect(self.analyze.analyze_work)
+
+
+
 
 # if __name__ == "__main__":
 #     app = QtWidgets.QApplication(sys.argv)

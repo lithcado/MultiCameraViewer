@@ -19,6 +19,7 @@ class ImageProcess:
         self.image = cv2.warpAffine(self.image, rotate_mat, (self.image.shape[1], self.image.shape[0]))
 
     def cvimage_to_qimage(self):
+        self.image = cv2.cvtColor(self.image, cv2.COLOR_BGR2RGB, self.image)
         self.image = QtGui.QImage(self.image, self.image.shape[1], self.image.shape[0], self.image.shape[1] * 3,
                                   QtGui.QImage.Format_RGB888)
 
