@@ -6,6 +6,7 @@ class ImageProcess:
     def __init__(self, image):
         self.image = image
 
+    # 这两个合并成1个，英文缩写参考horizontal和vertical
     def image_tilt_flip(self):
         cv2.flip(self.image, 0, self.image)
 

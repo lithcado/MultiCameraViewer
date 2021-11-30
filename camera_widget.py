@@ -1,7 +1,6 @@
-
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets, QtTest
-from ui_camera_viewer import Ui_Widget
+from ui_camera_widget import Ui_Widget
 from uvc_camera import UvcCamera
 import cv2
 import time
