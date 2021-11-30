@@ -6,10 +6,10 @@ class ImageProcess:
     def __init__(self, image):
         self.image = image
 
-    def image_tilt_mirror(self):
+    def image_tilt_flip(self):
         cv2.flip(self.image, 0, self.image)
 
-    def image_pan_mirror(self):
+    def image_pan_flip(self):
         cv2.flip(self.image, 1, self.image)
 
     # 顺时针旋转

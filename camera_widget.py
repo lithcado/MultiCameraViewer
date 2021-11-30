@@ -21,7 +21,10 @@ class UiCameraViewer(QtWidgets.QMainWindow):
         self.ui.btn_resolution_set.clicked.connect(self.resolution_set)
         self.ui.btn_start.clicked.connect(self.camera_open_thread)
         self.ui.btn_close.clicked.connect(self.camera_close)
-
+        self.ui.btn_pause.clicked.connect(self.camera_pause)
+        self.ui.btn_pan_flip.clicked.connect(self.pan_flip)
+        self.ui.btn_tilt_flip.clicked.connect(self.tilt_flip)
+        self.ui.btn_rotate.clicked.connect(self.rotate)
 
     def camera_open_thread(self):
         self.cam_viewing_thread = QtCore.QThread()
@@ -29,34 +32,55 @@ class UiCameraViewer(QtWidgets.QMainWindow):
         self.cam_viewing_thread.started.connect(self.camera_open)
         self.cam_viewing_thread.start()
 
-
-    def test(self):
-        while True:
-            img = cv2.imread('./test_image.jpg')
-            frame=ImageProcess(img)
-            frame.cvimage_to_qimage()
-            self.ui.pic1.setPixmap(QtGui.QPixmap(frame.image))
-            time.sleep(.1)
-
-
     def camera_open(self):
         self.cam.camera_init(self.window_num)
-        while self.cam.running_flag == 1:
-            # frame = cam1.get_frame()
-            self.cam.get_frame()
-            self.frame = ImageProcess(self.cam.frame)
-            self.frame.cvimage_to_qimage()
-            self.ui.pic1.setPixmap(QtGui.QPixmap(self.frame.image))
-            QtTest.QTest.qWait(100)
+        self.cam.print_parameter()
+        while self.cam.running_flag:
+            QtTest.QTest.qWait(1)
+            while not self.cam.pause_flag:
+                self.cam.get_frame()
+                self.frame = ImageProcess(self.cam.frame)
+                if self.cam.pan_flip_flag:
+                    self.frame.image_pan_flip()
+                if self.cam.tilt_flip_flag:
+                    self.frame.image_tilt_flip()
+                self.frame.image_rotate(self.cam.rotate_degree)
+                self.frame.cvimage_to_qimage()
+                self.ui.pic1.setPixmap(QtGui.QPixmap(self.frame.image))
+                QtTest.QTest.qWait(100)
 
     def camera_close(self):
         self.cam.running_flag = 0
         self.cam_viewing_thread.quit()
         self.cam.camera_close()
 
-    def resolution_set(self):
-        self.cam.camera_parameter_set(float(self.ui.input_width.text()), float(self.ui.input_height.text()), float(self.ui.input_fps.text()))
+    def camera_pause(self):
+        if self.cam.pause_flag:
+            self.cam.pause_flag = 0
+        else:
+            self.cam.pause_flag = 1
 
+    def pan_flip(self):
+        if self.cam.pan_flip_flag:
+            self.cam.pan_flip_flag = 0
+        else:
+            self.cam.pan_flip_flag = 1
+
+    def tilt_flip(self):
+        if self.cam.tilt_flip_flag:
+            self.cam.tilt_flip_flag = 0
+        else:
+            self.cam.tilt_flip_flag = 1
+
+    def rotate(self):
+        self.cam.rotate_degree += float(self.ui.input_degree.text())
+
+    def resolution_set(self):
+        self.camera_close()
+        self.cam.width_set = float(self.ui.input_width.text())
+        self.cam.height_set = float(self.ui.input_height.text())
+        self.cam.frame_rate_set = float(self.ui.input_fps.text())
+        self.camera_open_thread()
 
 '''
     def init_camera(self):
