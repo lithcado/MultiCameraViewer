@@ -1,11 +1,9 @@
-
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets, QtTest
 from ui_camera_viewer import Ui_Widget
 from uvc_camera import UvcCamera
-import cv2
-import time
 from image_process import ImageProcess
+import cv2
 
 
 class UiCameraViewer(QtWidgets.QMainWindow):
@@ -18,13 +16,21 @@ class UiCameraViewer(QtWidgets.QMainWindow):
         self.ui.retranslateUi(MainWindow)
         self.cam = UvcCamera()
         self.cam_viewing_thread = None
-        self.ui.btn_resolution_set.clicked.connect(self.resolution_set)
+        self.sample_time = 20
+        self.get_parameter_list_finished = 0                    # 仅第一次初始化要读取相机参数
         self.ui.btn_start.clicked.connect(self.camera_open_thread)
         self.ui.btn_close.clicked.connect(self.camera_close)
         self.ui.btn_pause.clicked.connect(self.camera_pause)
         self.ui.btn_pan_flip.clicked.connect(self.pan_flip)
         self.ui.btn_tilt_flip.clicked.connect(self.tilt_flip)
         self.ui.btn_rotate.clicked.connect(self.rotate)
+        self.ui.btn_sample_time.clicked.connect(self.sample_time_set)
+        self.ui.camera_parameter.currentIndexChanged.connect(self.cam_parameter_set)
+        #self.ui.btn_parameter_set.clicked.connect(self.resolution_set)
+
+    # closeEvent有问题啊
+    def closeEvent(self, event):
+        self.cam.camera_close()
 
     def camera_open_thread(self):
         self.cam_viewing_thread = QtCore.QThread()
@@ -34,31 +40,45 @@ class UiCameraViewer(QtWidgets.QMainWindow):
 
     def camera_open(self):
         self.cam.camera_init(self.window_num)
-        self.cam.print_parameter()
+        self.ui.btn_start.setEnabled(False)
+        if not self.get_parameter_list_finished:            # 第一次初始化读取相机可用参数
+            self.cam.available_parameter_scan()
+            for parameter in self.cam.parameter_list:
+                self.ui.camera_parameter.addItem(str(parameter[0]) + '*' + str(parameter[1]) + '*' + str(parameter[2]))
+                QtTest.QTest.qWait(1)
+            self.get_parameter_list_finished = 1
         while self.cam.running_flag:
             QtTest.QTest.qWait(1)
-            while not self.cam.pause_flag:
+            while (not self.cam.pause_flag) and self.cam.running_flag:      #按下暂停或者停止时跳出这个循环
                 self.cam.get_frame()
                 self.frame = ImageProcess(self.cam.frame)
                 if self.cam.pan_flip_flag:
                     self.frame.image_pan_flip()
                 if self.cam.tilt_flip_flag:
                     self.frame.image_tilt_flip()
-                self.frame.image_rotate(self.cam.rotate_degree)
+                self.frame.image_rotate(self.cam.rotate_degree,self.cam.scale_set)
                 self.frame.cvimage_to_qimage()
-                self.ui.pic1.setPixmap(QtGui.QPixmap(self.frame.image))
-                QtTest.QTest.qWait(100)
+                #self.frame.image_process(self.cam.pan_flip_flag, self.cam.tilt_flip_flag, self.cam.rotate_degree)  可以优化
+                self.ui.pic1.setPixmap(QtGui.QPixmap(self.frame.image).scaled(self.ui.pic1.size(), QtCore.Qt.KeepAspectRatio))
+                QtTest.QTest.qWait(int(self.sample_time))
 
     def camera_close(self):
         self.cam.running_flag = 0
         self.cam_viewing_thread.quit()
         self.cam.camera_close()
+        self.ui.btn_start.setEnabled(True)
 
     def camera_pause(self):
         if self.cam.pause_flag:
             self.cam.pause_flag = 0
+            self.ui.btn_pause.setFlat(False)
         else:
             self.cam.pause_flag = 1
+            self.ui.btn_pause.setFlat(True)
+        if self.cam.state_flag == 1:
+            self.cam.state_flag = 2
+        elif self.cam.state_flag == 2:
+            self.cam.state_flag = 1
 
     def pan_flip(self):
         if self.cam.pan_flip_flag:
@@ -73,14 +93,22 @@ class UiCameraViewer(QtWidgets.QMainWindow):
             self.cam.tilt_flip_flag = 1
 
     def rotate(self):
-        self.cam.rotate_degree += float(self.ui.input_degree.text())
+        self.cam.rotate_degree = float(self.ui.input_degree.text())
+        self.cam.scale_set = float(self.ui.input_scale.text())
 
-    def resolution_set(self):
+    def cam_parameter_set(self):
         self.camera_close()
-        self.cam.width_set = float(self.ui.input_width.text())
-        self.cam.height_set = float(self.ui.input_height.text())
-        self.cam.frame_rate_set = float(self.ui.input_fps.text())
+        parameter_id = self.ui.camera_parameter.currentIndex()
+        self.cam.width_set = float(self.cam.parameter_list[parameter_id][0])
+        self.cam.height_set = float(self.cam.parameter_list[parameter_id][1])
+        self.cam.frame_rate_set = float(self.cam.parameter_list[parameter_id][2])
         self.camera_open_thread()
+
+    def sample_time_set(self):
+        self.sample_time = self.ui.input_sample_time.text()
+
+
+
 
 '''
     def init_camera(self):
