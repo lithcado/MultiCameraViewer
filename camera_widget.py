@@ -25,8 +25,10 @@ class UiCameraViewer(QtWidgets.QMainWindow):
         self.ui.btn_tilt_flip.clicked.connect(self.tilt_flip)
         self.ui.btn_rotate.clicked.connect(self.rotate)
         self.ui.btn_sample_time.clicked.connect(self.sample_time_set)
+        self.ui.btn_information_inquire.clicked.connect(self.imformation_inquire)
         self.ui.camera_parameter.currentIndexChanged.connect(self.cam_parameter_set)
-        #self.ui.btn_parameter_set.clicked.connect(self.resolution_set)
+        self.ui.format_list.currentIndexChanged.connect(self.video_format_set)
+        # self.ui.btn_parameter_set.clicked.connect(self.resolution_set)
 
     # closeEvent有问题啊
     def closeEvent(self, event):
@@ -49,7 +51,7 @@ class UiCameraViewer(QtWidgets.QMainWindow):
             self.get_parameter_list_finished = 1
         while self.cam.running_flag:
             QtTest.QTest.qWait(1)
-            while (not self.cam.pause_flag) and self.cam.running_flag:      #按下暂停或者停止时跳出这个循环
+            while (not self.cam.pause_flag) and self.cam.running_flag:      # 按下暂停或者停止时跳出这个循环
                 self.cam.get_frame()
                 self.frame = ImageProcess(self.cam.frame)
                 if self.cam.pan_flip_flag:
@@ -58,7 +60,7 @@ class UiCameraViewer(QtWidgets.QMainWindow):
                     self.frame.image_tilt_flip()
                 self.frame.image_rotate(self.cam.rotate_degree,self.cam.scale_set)
                 self.frame.cvimage_to_qimage()
-                #self.frame.image_process(self.cam.pan_flip_flag, self.cam.tilt_flip_flag, self.cam.rotate_degree)  可以优化
+                # self.frame.image_process(self.cam.pan_flip_flag, self.cam.tilt_flip_flag, self.cam.rotate_degree)  可以优化
                 self.ui.pic1.setPixmap(QtGui.QPixmap(self.frame.image).scaled(self.ui.pic1.size(), QtCore.Qt.KeepAspectRatio))
                 QtTest.QTest.qWait(int(self.sample_time))
 
@@ -107,18 +109,17 @@ class UiCameraViewer(QtWidgets.QMainWindow):
     def sample_time_set(self):
         self.sample_time = self.ui.input_sample_time.text()
 
+    def video_format_set(self):
+        self.camera_close()
+        parameter_id = self.ui.format_list.currentIndex()
+        self.cam.format_id = int(parameter_id)
+        self.camera_open_thread()
 
-
-
-'''
-    def init_camera(self):
-        self.cam_initial_thread = QtCore.QThread()
-        self.cam.moveToThread(self.cam_initial_thread)
-        self.cam_initial_thread.started.connect(self.cam.print_parameter)
-        self.cam_initial_thread.start()
-'''
-
-
+    def imformation_inquire(self):
+        text = self.cam.cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+        self.ui.information_output.setText(text)
+        text = self.cam.cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+        self.ui.information_output.setText(text)
 
 # only for test
 def print_ok():
