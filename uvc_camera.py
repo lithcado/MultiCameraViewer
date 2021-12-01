@@ -20,7 +20,7 @@ class UvcCamera(QtCore.QObject):
         self.state_flag = 0         # 0: 停止 1: 工作 2: 暂停
         self.running_flag = 0
         self.pause_flag = 0
-        self.pan_flip_flag = 0
+        self.pan_flip_flag = 0  # 成员变量私有，通过get函数获取
         self.tilt_flip_flag = 0
         self.rotate_degree = 0
         self.scale_set = 1          # not used
@@ -34,7 +34,7 @@ class UvcCamera(QtCore.QObject):
 
     def camera_init(self, cam_name):
         self.state_flag = 1
-        self.running_flag = 1
+        self.running_flag = 1   
         self.cam_name = cam_name
         self.cap = cv2.VideoCapture(cam_name, cv2.CAP_MSMF)
         self.camera_parameter_set()
@@ -55,6 +55,15 @@ class UvcCamera(QtCore.QObject):
                 if real_width == resolution[0] and real_height == resolution[1] and real_fps == fps:
                     self.parameter_list.append((real_width, real_height, real_fps))
                 QtTest.QTest.qWait(1)
+
+
+    # def start_grab(self):
+
+    # def stop_grab(self):
+
+    
+
+
 
     def get_frame(self):
         ret, self.frame = self.cap.read()
@@ -84,7 +93,7 @@ class UvcCamera(QtCore.QObject):
         if not self.cap.isOpened():
             self.state_flag = 0
         self.cap.release()
-        cv2.destroyAllWindows()
+        # cv2.destroyAllWindows()
 
     # only for test
     def print_parameter(self):

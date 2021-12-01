@@ -6,7 +6,7 @@ class ImageProcess:
     def __init__(self, image):
         self.image = image
 
-
+    # 这两个合并成1个，英文缩写参考horizontal和vertical
     def image_tilt_flip(self):
         cv2.flip(self.image, 0, self.image)
     
@@ -20,7 +20,10 @@ class ImageProcess:
         if tilt_flip_flag:
             cv2.flip(self.image, 0, self.image)
 
+    # 最后-增加亮度、对比度等调整功能
+
     # 顺时针旋转
+    # 扩展成仿射变换
     def image_rotate(self, degree=0, scale=1):
         (cX, cY) = (self.image.shape[1] // 2, self.image.shape[0] // 2)
         rotate_mat = cv2.getRotationMatrix2D((cX, cY), -degree, scale)
