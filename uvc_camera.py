@@ -77,7 +77,6 @@ class UvcCamera(QtCore.QObject):
             self.sig_get_frame_finished.emit(frame)
             QtTest.QTest.qWait(int(self._sample_time))
 
-
     def stop_grab(self):
         self._camera_state = 1
 

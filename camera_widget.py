@@ -6,12 +6,12 @@ from image_process import ImageProcess
 import cv2
 
 
-class UiCameraViewer(QtWidgets.QMainWindow):
+class UiCameraViewer(QtWidgets.QWidget):
     def __init__(self, window_num) -> None:
         super().__init__()
         self.ui = Ui_Widget()
-        self.ui.setupUi(MainWindow)
-        self.ui.retranslateUi(MainWindow)
+        self.ui.setupUi(self)
+        self.ui.retranslateUi(self)
 
 
         self.window_num = window_num
@@ -22,9 +22,10 @@ class UiCameraViewer(QtWidgets.QMainWindow):
         self.cam.sig_get_frame_finished.connect(self.processor.image_process)
         self.processor.sig_image_process_finished.connect(self.image_show)
 
-        self.ui.btn_open_camera.clicked.connect(self.camera_open)
-        self.ui.btn_start_grab.clicked.connect(self.camera_grab_thread)
-        self.ui.btn_close.clicked.connect(self.camera_close)
+        "按钮的clicked都是信号，对应的函数叫槽函数，所有按钮对应的槽函数都按照统一的方式明明，做出区分，例如btn_start_grab_clicked"
+        self.ui.btn_open_camera.clicked.connect(self.bth_camera_open_clicked)
+        self.ui.btn_start_grab.clicked.connect(self.btn_start_grab_clicked)
+        self.ui.btn_close.clicked.connect(self.btn_camera_close_clicked)
         self.ui.btn_stop_grab.clicked.connect(self.cam.stop_grab)
         #self.ui.btn_restart.clicked.connect(self.)
         self.ui.btn_pan_flip.clicked.connect(self.processor.set_horizontal_flip_flag)
@@ -43,14 +44,23 @@ class UiCameraViewer(QtWidgets.QMainWindow):
 
     # def updateBtn():
     #     if running:
-    def camera_grab_thread(self):
-        self.cam_viewing_thread = QtCore.QThread()
+    '''--------------------------------------------公共槽函数---------------------------------------'''
+    def image_show(self, qimage):
+        self.ui.pic1.setPixmap(QtGui.QPixmap(qimage).scaled(self.ui.pic1.size(), QtCore.Qt.KeepAspectRatio))
+
+    
+    '''--------------------------------------------UI槽函数---------------------------------------'''
+    def btn_start_grab_clicked(self):
+        if not self.cam_viewing_thread:
+            self.cam_viewing_thread = QtCore.QThread()
+        elif self.cam_viewing_thread.isRunning():
+            self.cam_viewing_thread.quit()
+            self.cam_viewing_thread.wait()
         print(self.cam.moveToThread(self.cam_viewing_thread))
         print(self.cam_viewing_thread.started.connect(self.cam.start_grab))
         self.cam_viewing_thread.start()
 
-
-    def camera_open(self):
+    def bth_camera_open_clicked(self):
         self.cam.camera_init(self.window_num)  # cam_id
         self.ui.btn_open_camera.setEnabled(False)     # 先不做，让孙，用状态标志位做
         if not self.cam.parameter_list_read_get():            # 第一次初始化读取相机可用参数
@@ -59,17 +69,14 @@ class UiCameraViewer(QtWidgets.QMainWindow):
                 QtTest.QTest.qWait(1)
             self.cam.parameter_list_read_set(1)
 
-    def image_show(self, qimage):
-        self.ui.pic1.setPixmap(QtGui.QPixmap(qimage).scaled(self.ui.pic1.size(), QtCore.Qt.KeepAspectRatio))
-
-    def camera_close(self):
+    def btn_camera_close_clicked(self):
         self.cam.stop_grab()
 
-        self.cam_viewing_thread.quit()
-        self.cam_viewing_thread.wait()
+        # self.cam_viewing_thread.quit()
+        # self.cam_viewing_thread.wait()
 
         QtTest.QTest.qWait(1000)
-        print(self.cam_viewing_thread.isRunning())
+        # print(self.cam_viewing_thread.isRunning())
         self.cam.camera_release()
         self.ui.btn_open_camera.setEnabled(True)
 
@@ -84,22 +91,22 @@ class UiCameraViewer(QtWidgets.QMainWindow):
         self.cam.sample_time_set(int(self.ui.input_sample_time.text()))
 
     def cam_parameter_set(self):
-        self.camera_close()
-        self.camera_open()
+        self.btn_camera_close_clicked()
+        self.bth_camera_open_clicked()
         parameter_id = self.ui.camera_parameter.currentIndex()-1
         self.cam.camera_parameter_set(float(self.cam.parameter_list[parameter_id][0]),
                                       float(self.cam.parameter_list[parameter_id][1]),
                                       float(self.cam.parameter_list[parameter_id][2]))
         self.cam.print_parameter()
-        self.camera_grab_thread()
+        self.btn_start_grab_clicked()
 
     def video_format_set(self):
-        self.camera_close()
-        self.camera_open()
+        self.btn_camera_close_clicked()
+        self.bth_camera_open_clicked()
         format_id = self.ui.format_list.currentIndex()
         self.cam.video_format_set(format_id)
         self.cam.video_format_get()
-        self.camera_grab_thread()
+        self.btn_start_grab_clicked()
 
     def information_inquire(self):
         text = self.cam.cap.get(cv2.CAP_PROP_FRAME_WIDTH)
@@ -114,8 +121,8 @@ def print_ok():
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
+    # MainWindow = QtWidgets.QMainWindow()
     ui = UiCameraViewer(0)
-    MainWindow.show()
+    ui.show()
     sys.exit(app.exec_())
 
