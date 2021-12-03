@@ -34,7 +34,7 @@ class Ui_Widget(object):
         self.btn_sample_time.setGeometry(QtCore.QRect(240, 180, 121, 31))
         self.btn_sample_time.setObjectName("btn_sample_time")
         self.format_list = QtWidgets.QComboBox(Form)
-        self.format_list.setGeometry(QtCore.QRect(157, 61, 191, 27))
+        self.format_list.setGeometry(QtCore.QRect(130, 60, 191, 27))
         self.format_list.setObjectName("format_list")
         self.format_list.addItem("")
         self.format_list.addItem("")
@@ -55,7 +55,7 @@ class Ui_Widget(object):
         self.label_2.setGeometry(QtCore.QRect(60, 60, 91, 31))
         self.label_2.setObjectName("label_2")
         self.camera_parameter = QtWidgets.QComboBox(Form)
-        self.camera_parameter.setGeometry(QtCore.QRect(160, 110, 191, 27))
+        self.camera_parameter.setGeometry(QtCore.QRect(130, 110, 191, 27))
         self.camera_parameter.setObjectName("camera_parameter")
         self.camera_parameter.addItem("")
         self.information_output = QtWidgets.QTextEdit(Form)
@@ -76,6 +76,9 @@ class Ui_Widget(object):
         self.btn_start_grab = QtWidgets.QPushButton(Form)
         self.btn_start_grab.setGeometry(QtCore.QRect(930, 530, 111, 71))
         self.btn_start_grab.setObjectName("btn_start_grab")
+        self.btn_parameter_set = QtWidgets.QPushButton(Form)
+        self.btn_parameter_set.setGeometry(QtCore.QRect(330, 80, 91, 31))
+        self.btn_parameter_set.setObjectName("btn_parameter_set")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -100,4 +103,5 @@ class Ui_Widget(object):
         self.btn_pan_flip.setText(_translate("Form", "水平镜像"))
         self.btn_information_inquire.setText(_translate("Form", "信息查询"))
         self.btn_start_grab.setText(_translate("Form", "开始抓取"))
+        self.btn_parameter_set.setText(_translate("Form", "设置参数"))
 

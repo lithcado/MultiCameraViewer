@@ -22,6 +22,3 @@ class ParameterSetError(CameraError):
     pass
 
 
-class FormatSetError(CameraError):
-    pass
-

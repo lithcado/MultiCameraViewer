@@ -104,8 +104,8 @@
   <widget class="QComboBox" name="format_list">
    <property name="geometry">
     <rect>
-     <x>157</x>
-     <y>61</y>
+     <x>130</x>
+     <y>60</y>
      <width>191</width>
      <height>27</height>
     </rect>
@@ -189,7 +189,7 @@
   <widget class="QComboBox" name="camera_parameter">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>130</x>
      <y>110</y>
      <width>191</width>
      <height>27</height>
@@ -271,6 +271,19 @@
    </property>
    <property name="text">
     <string>开始抓取</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_parameter_set">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>80</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>设置参数</string>
    </property>
   </widget>
  </widget>

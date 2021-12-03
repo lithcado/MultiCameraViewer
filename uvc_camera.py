@@ -29,7 +29,7 @@ class UvcCamera(QtCore.QObject):
 
     def camera_init(self, cam_name):
         self.cam_name = cam_name
-        self.cap = cv2.VideoCapture(cam_name, cv2.CAP_MSMF)
+        self.cap = cv2.VideoCapture(cam_name, cv2.CAP_DSHOW)
         if self.cap.isOpened():
             self._camera_state = 1
             self.available_parameter_scan()
@@ -49,14 +49,10 @@ class UvcCamera(QtCore.QObject):
             for resolution in resolution_list:
                 self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, resolution[0])
                 self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, resolution[1])
+                real_width, real_height = self.cap.get(cv2.CAP_PROP_FRAME_WIDTH), self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+                if real_width == resolution[0] and real_height == resolution[1]:
+                    self.parameter_list.append((real_width, real_height))
                 QtTest.QTest.qWait(1)
-                for fps in fps_list:
-                    self.cap.set(cv2.CAP_PROP_FPS, fps)
-                    real_width, real_height, real_fps = self.cap.get(cv2.CAP_PROP_FRAME_WIDTH), self.cap.get(
-                        cv2.CAP_PROP_FRAME_HEIGHT), self.cap.get(cv2.CAP_PROP_FPS)
-                    if real_width == resolution[0] and real_height == resolution[1] and real_fps == fps:
-                        self.parameter_list.append((real_width, real_height, real_fps))
-                    QtTest.QTest.qWait(1)
             self._parameter_scanned_flag = 1
             if not self.parameter_list:
                 raise ParameterListError
@@ -90,24 +86,15 @@ class UvcCamera(QtCore.QObject):
         else:
             self._camera_state = 0
 
-    def camera_parameter_set(self, width_set, height_set, fps_set):
+    def camera_parameter_set(self, width_set, height_set, format_id):
         flag1 = self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, width_set)
         flag2 = self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height_set)
-        flag3 = self.cap.set(cv2.CAP_PROP_FPS, fps_set)
+        flag3 = self.cap.set(cv2.CAP_PROP_FOURCC, format[format_id])
         if not (flag1 and flag2 and flag3):
             print("Camera " + str(self.cam_name) + " parameter set failed!")
             raise ParameterSetError
+        print(decode_fourcc(self.cap.get(cv2.CAP_PROP_FOURCC)))  # for test
 
-    def video_format_set(self, format_id):
-        flag = self.cap.set(cv2.CAP_PROP_FOURCC, format[format_id])
-        if flag:
-            print("Camera " + str(self.cam_name) + " format set OK!")       # for test
-            print(decode_fourcc(self.cap.get(cv2.CAP_PROP_FOURCC)))         # for test
-            return True
-        else:
-            print("Camera " + str(self.cam_name) + " format set failed!")   # for test
-            print(decode_fourcc(self.cap.get(cv2.CAP_PROP_FOURCC)))         # for test
-            return False
 
     def camera_state_get(self):
         return self._camera_state
@@ -115,8 +102,7 @@ class UvcCamera(QtCore.QObject):
     def camera_parameter_get(self):
         width = self.cap.get(cv2.CAP_PROP_FRAME_WIDTH)
         height = self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-        fps = self.cap.get(cv2.CAP_PROP_FPS)
-        return width, height, fps
+        return width, height
 
     def video_format_get(self):
         video_format = decode_fourcc(self.cap.get(cv2.CAP_PROP_FOURCC))
@@ -127,7 +113,6 @@ class UvcCamera(QtCore.QObject):
     def print_parameter(self):
         print(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         print(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        print(self.cap.get(cv2.CAP_PROP_FPS))
 
     def sample_time_set(self, sample_time):
         self._sample_time = sample_time
@@ -145,6 +130,7 @@ if __name__ == '__main__':
     cam1 = UvcCamera()
     cam1.camera_init(0)
     cam1.start_grab()
+    cam1.print_parameter()
     cam1.stop_grab()
     cam1.camera_release()
     cam1.camera_init(0)
