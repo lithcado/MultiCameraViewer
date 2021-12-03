@@ -6,164 +6,66 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1065</width>
-    <height>820</height>
+    <width>561</width>
+    <height>380</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLineEdit" name="input_scale">
+  <widget class="QPushButton" name="btn_open_camera">
    <property name="geometry">
     <rect>
-     <x>740</x>
-     <y>100</y>
-     <width>131</width>
+     <x>440</x>
+     <y>130</y>
+     <width>81</width>
      <height>41</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn_start">
-   <property name="geometry">
-    <rect>
-     <x>940</x>
-     <y>260</y>
-     <width>101</width>
-     <height>51</height>
     </rect>
    </property>
    <property name="text">
     <string>启动</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="btn_pause">
+  <widget class="QPushButton" name="btn_stop_grab">
    <property name="geometry">
     <rect>
-     <x>940</x>
-     <y>450</y>
-     <width>101</width>
-     <height>51</height>
+     <x>440</x>
+     <y>310</y>
+     <width>81</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
     <string>暂停</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>650</x>
-     <y>100</y>
-     <width>61</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>缩放比例</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>650</x>
-     <y>50</y>
-     <width>91</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>角度</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>80</y>
-     <width>54</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>宽*高*FPS</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn_sample_time">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>140</y>
-     <width>141</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>设置采样时间(ms)</string>
-   </property>
-  </widget>
   <widget class="QComboBox" name="format_list">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>30</y>
-     <width>191</width>
-     <height>27</height>
+     <x>90</x>
+     <y>10</y>
+     <width>71</width>
+     <height>31</height>
     </rect>
    </property>
-   <item>
-    <property name="text">
-     <string>YUY2</string>
-    </property>
-   </item>
    <item>
     <property name="text">
      <string>MJPG</string>
     </property>
    </item>
-  </widget>
-  <widget class="QPushButton" name="btn_tilt_flip">
-   <property name="geometry">
-    <rect>
-     <x>940</x>
-     <y>700</y>
-     <width>101</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>垂直镜像</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn_rotate">
-   <property name="geometry">
-    <rect>
-     <x>920</x>
-     <y>60</y>
-     <width>101</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>旋转</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="input_degree">
-   <property name="geometry">
-    <rect>
-     <x>740</x>
-     <y>40</y>
-     <width>131</width>
-     <height>41</height>
-    </rect>
-   </property>
+   <item>
+    <property name="text">
+     <string>YUY2</string>
+    </property>
+   </item>
   </widget>
   <widget class="QLabel" name="pic1">
    <property name="geometry">
     <rect>
      <x>80</x>
-     <y>250</y>
-     <width>811</width>
-     <height>531</height>
+     <y>120</y>
+     <width>321</width>
+     <height>241</height>
     </rect>
    </property>
    <property name="text">
@@ -176,23 +78,72 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>30</y>
-     <width>91</width>
+     <x>11</x>
+     <y>9</y>
+     <width>71</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>传输格式</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="btn_close">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>190</y>
+     <width>81</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>停止</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_start_grab">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>250</y>
+     <width>81</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>开始抓取</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>10</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>宽*高*FPS</string>
+   </property>
+  </widget>
   <widget class="QComboBox" name="camera_parameter">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>80</y>
-     <width>191</width>
-     <height>27</height>
+     <x>280</x>
+     <y>10</y>
+     <width>141</width>
+     <height>31</height>
     </rect>
    </property>
    <item>
@@ -201,66 +152,74 @@
     </property>
    </item>
   </widget>
-  <widget class="QTextEdit" name="information_output">
+  <widget class="QPushButton" name="btn_parameter_set">
    <property name="geometry">
     <rect>
-     <x>420</x>
+     <x>440</x>
      <y>10</y>
-     <width>201</width>
-     <height>121</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn_close">
-   <property name="geometry">
-    <rect>
-     <x>940</x>
-     <y>350</y>
-     <width>101</width>
-     <height>51</height>
+     <width>81</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
-    <string>停止</string>
+    <string>设置参数</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>70</y>
+     <width>71</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>左转90度</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>70</y>
+     <width>71</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>右转90度</string>
    </property>
   </widget>
   <widget class="QPushButton" name="btn_pan_flip">
    <property name="geometry">
     <rect>
-     <x>940</x>
-     <y>590</y>
-     <width>101</width>
-     <height>61</height>
+     <x>260</x>
+     <y>70</y>
+     <width>71</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
     <string>水平镜像</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="input_sample_time">
+  <widget class="QPushButton" name="btn_tilt_flip">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>130</y>
-     <width>141</width>
-     <height>41</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn_information_inquire">
-   <property name="geometry">
-    <rect>
-     <x>470</x>
-     <y>150</y>
-     <width>101</width>
+     <x>370</x>
+     <y>70</y>
+     <width>71</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>信息查询</string>
+    <string>垂直镜像</string>
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../zjuxiaohui.qrc"/>
+ </resources>
  <connections/>
 </ui>
