@@ -27,25 +27,6 @@ class Ui_MainWindow(object):
         # Tang: 要把splitter套一个Layout才能显示出来
         self.verticalLayout.addWidget(self.splitter)
 
-        # self.graphicsView = QtWidgets.QGraphicsView(self.centralwidget)
-        # self.graphicsView.setGeometry(QtCore.QRect(120, 230, 256, 192))
-        # self.graphicsView.setObjectName("graphicsView")
-
-        # self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
-        # self.lineEdit.setGeometry(QtCore.QRect(180, 100, 113, 20))
-        # self.lineEdit.setObjectName("lineEdit")
-
-        # self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
-        # self.textEdit.setGeometry(QtCore.QRect(170, 140, 104, 71))
-        # self.textEdit.setObjectName("textEdit")
-
-        # self.spinBox = QtWidgets.QSpinBox(self.centralwidget)
-        # self.spinBox.setGeometry(QtCore.QRect(340, 170, 42, 22))
-        # self.spinBox.setObjectName("spinBox")
-
-        # self.openGLWidget = QtWidgets.QOpenGLWidget(self.centralwidget)
-        # self.openGLWidget.setGeometry(QtCore.QRect(420, 230, 300, 200))
-        # self.openGLWidget.setObjectName("openGLWidget")
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -68,5 +49,6 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
+    ui.retranslateUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())

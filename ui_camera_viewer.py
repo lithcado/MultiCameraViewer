@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Widget(object):
 
     def setupUi(self, CameraWidget):
-        CameraWidget.setObjectName("Form")
+        CameraWidget.setObjectName("CameraWidget")
         CameraWidget.resize(561, 380)
         self.btn_open_camera = QtWidgets.QPushButton(CameraWidget)
         self.btn_open_camera.setGeometry(QtCore.QRect(440, 130, 81, 41))
@@ -70,20 +70,20 @@ class Ui_Widget(object):
 
     def retranslateUi(self, CameraWidget):
         _translate = QtCore.QCoreApplication.translate
-        CameraWidget.setWindowTitle(_translate("Form", "Form"))
-        self.btn_open_camera.setText(_translate("Form", "启动"))
-        self.btn_stop_grab.setText(_translate("Form", "暂停"))
-        self.format_list.setItemText(0, _translate("Form", "MJPG"))
-        self.format_list.setItemText(1, _translate("Form", "YUY2"))
-        self.image_window.setText(_translate("Form", "相机1画面"))
-        self.label_2.setText(_translate("Form", "传输格式"))
-        self.btn_close_camera.setText(_translate("Form", "停止"))
-        self.btn_start_grab.setText(_translate("Form", "开始抓取"))
-        self.label.setText(_translate("Form", "宽*高*FPS"))
-        self.camera_parameter.setItemText(0, _translate("Form", "当前为默认参数"))
-        self.btn_parameter_set.setText(_translate("Form", "设置参数"))
-        self.btn_counterclockwise_90.setText(_translate("Form", "左转90度"))
-        self.btn_clockwise_90.setText(_translate("Form", "右转90度"))
-        self.btn_horizontal_flip.setText(_translate("Form", "水平镜像"))
-        self.btn_vertical_flip.setText(_translate("Form", "垂直镜像"))
+        CameraWidget.setWindowTitle(_translate("CameraWidget", "CameraWidget"))
+        self.btn_open_camera.setText(_translate("CameraWidget", "启动"))
+        self.btn_stop_grab.setText(_translate("CameraWidget", "暂停"))
+        self.format_list.setItemText(0, _translate("CameraWidget", "MJPG"))
+        self.format_list.setItemText(1, _translate("CameraWidget", "YUY2"))
+        self.image_window.setText(_translate("CameraWidget", "相机1画面"))
+        self.label_2.setText(_translate("CameraWidget", "传输格式"))
+        self.btn_close_camera.setText(_translate("CameraWidget", "停止"))
+        self.btn_start_grab.setText(_translate("CameraWidget", "开始抓取"))
+        self.label.setText(_translate("CameraWidget", "宽*高*FPS"))
+        self.camera_parameter.setItemText(0, _translate("CameraWidget", "当前为默认参数"))
+        self.btn_parameter_set.setText(_translate("CameraWidget", "设置参数"))
+        self.btn_counterclockwise_90.setText(_translate("CameraWidget", "左转90度"))
+        self.btn_clockwise_90.setText(_translate("CameraWidget", "右转90度"))
+        self.btn_horizontal_flip.setText(_translate("CameraWidget", "水平镜像"))
+        self.btn_vertical_flip.setText(_translate("CameraWidget", "垂直镜像"))
 
