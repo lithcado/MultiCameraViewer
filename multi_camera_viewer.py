@@ -2,9 +2,11 @@
 
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-from test import Ui_MainWindow
+from ui_mainwindow import Ui_MainWindow
 
-QtCore.QTh
+from camera_widget import UiCameraViewer
+
+
 class MultiCameraViewer(QtWidgets.QMainWindow):
     def __init__(self) -> None:
         super().__init__()
@@ -12,7 +14,14 @@ class MultiCameraViewer(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.ui.retranslateUi(self)
 
-        self.ui.pushButton.clicked.connect(self.open_camera)
+        # Tang: 加入第一个窗口
+        self.left_camera = UiCameraViewer(0)
+        self.ui.splitter.addWidget(self.left_camera)
+
+        # Tang: 点击增加相机按钮后加入第二个窗口，按钮待实现
+        self.right_camra = UiCameraViewer(0)
+        self.ui.splitter.addWidget(self.right_camra)
+        
         # self.show()
     
     # def open_camera():
@@ -33,6 +42,7 @@ class MultiCameraViewer(QtWidgets.QMainWindow):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
+    # MainWindow = QtWidgets.QMainWindow()
     multi_cam_viewer = MultiCameraViewer()
     multi_cam_viewer.show()
     sys.exit(app.exec_())

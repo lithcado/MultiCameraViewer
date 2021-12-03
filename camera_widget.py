@@ -7,12 +7,12 @@ from image_process import ImageProcess
 import cv2
 
 
-class UiCameraViewer(QtWidgets.QMainWindow):
+class UiCameraViewer(QtWidgets.QWidget):
     def __init__(self, window_num) -> None:
         super().__init__()
         self.ui = Ui_Widget()
-        self.ui.setupUi(MainWindow)
-        self.ui.retranslateUi(MainWindow)
+        self.ui.setupUi(self)
+        self.ui.retranslateUi(self)
 
         self.window_num = window_num             # 窗口名字
         self.cam = UvcCamera()
@@ -95,14 +95,12 @@ class UiCameraViewer(QtWidgets.QMainWindow):
     def btn_counterclockwise_rotate(self):
         self.processor.degree_minus_90()
 
-
     # self.processor.set_image_scale(float(self.ui.input_scale.text()))
 
     '''
     def sample_time_set(self):
         self.cam.sample_time_set(int(self.ui.input_sample_time.text()))
     '''
-
     def btn_cam_parameter_set(self):
         self.btn_camera_close()
         self.btn_camera_open()
@@ -123,8 +121,8 @@ class UiCameraViewer(QtWidgets.QMainWindow):
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
+    # MainWindow = QtWidgets.QMainWindow()
     ui = UiCameraViewer(0)
-    MainWindow.show()
+    ui.show()
     sys.exit(app.exec_())
 

@@ -32,8 +32,8 @@
 ### 2021.12.3
 
 - [x] camera_widget中函数对应按钮
-- [ ] mainwindow里catch异常
+- [ ] mainwindow里catch异常 
 - [ ] 获得相机名字
-- [ ] 打包exe
-- [ ] 程序必须关闭相机再按右上角叉叉
+- [ ] 多窗口实现
+- [ ] 按钮属性优化
 
