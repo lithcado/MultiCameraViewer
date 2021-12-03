@@ -7,28 +7,36 @@ class ImageProcess(QtCore.QObject):
 
     def __init__(self):
         super().__init__()
-        self._horizontal_flip_flag = 0        # 成员变量私有，通过get函数获取
-        self._vertical_flip_flag = 0
-        self._rotate_degree = 0
-        self._image_scale = 1
+        self._horizontal_flip_flag = 0        # 水平反转标志位 1：水平反转
+        self._vertical_flip_flag = 0        # 垂直翻转标志位
+        self._rotate_degree = 0             # 旋转角度
+        self._image_scale = 1               # 缩放尺寸，后续可加入仿射变换中
 
-    def set_horizontal_flip_flag(self):
+    def horizontal_flip_flag_set(self):
         if self._horizontal_flip_flag:
             self._horizontal_flip_flag = 0
         else:
             self._horizontal_flip_flag = 1
 
-    def set_vertical_flip_flag(self):
+    def vertical_flip_flag_set(self):
         if self._vertical_flip_flag:
             self._vertical_flip_flag = 0
         else:
             self._vertical_flip_flag = 1
 
-    def set_rotate_degree(self, degree):
+    '''
+    def rotate_degree_set(self, degree):
         self._rotate_degree = -degree
 
-    def set_image_scale(self, scale):
+    def image_scale_set(self, scale):
         self._image_scale = scale
+    '''
+
+    def degree_plus_90(self):
+        self._rotate_degree += 90
+
+    def degree_minus_90(self):
+        self._rotate_degree -= 90
 
     def image_flip(self, cvimage):
         image = cvimage
@@ -44,7 +52,7 @@ class ImageProcess(QtCore.QObject):
     def image_rotate(self, cvimage):
         image = cvimage
         (cX, cY) = (image.shape[1] // 2, image.shape[0] // 2)
-        rotate_mat = cv2.getRotationMatrix2D((cX, cY), self._rotate_degree, self._image_scale)
+        rotate_mat = cv2.getRotationMatrix2D((cX, cY), -self._rotate_degree, self._image_scale)
         image = cv2.warpAffine(image, rotate_mat, (image.shape[1], image.shape[0]))
         return image
 

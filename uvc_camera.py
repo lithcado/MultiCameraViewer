@@ -6,10 +6,11 @@ from PyQt5 import QtCore,QtTest
 import cv2
 import numpy
 from error_type import *
+import utils
 
 resolution_list = [(640, 480), (800, 600), (1024, 768), (1280, 960), (1600, 1200), (2048, 1536), (2592, 1944),
                         (1280, 720), (1920, 1080), (3840, 2160)]
-fps_list = [30, 60]
+
 format = [cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), cv2.VideoWriter_fourcc('Y', 'U', 'Y', '2')]
 
 
@@ -18,14 +19,14 @@ class UvcCamera(QtCore.QObject):
 
     def __init__(self):
         super().__init__()
-        self.cam_name = 0
+        self.cam_name = 0               # 相机编号 VideoCapture(cam_name)
         self._camera_state = 0         # 0: 关闭 1: 开启 2：grab中 -1:未正常关闭
-
-        self._sample_time = 20          # 窗口采样时间
+        self._sample_time = 20          # 窗口采样时间 已废除
         self._parameter_scanned_flag = 0      # 0: 初次打开未扫描 1：已扫描
-        self._parameter_list_read_flag = 0
-        self.cap = None
-        self.parameter_list = []
+        self._parameter_list_read_flag = 0      # 1：界面中已经读到相机参数
+
+        self.cap = None                         # 相机流
+        self.parameter_list = []                # 可用参数列表
 
     def camera_init(self, cam_name):
         self.cam_name = cam_name
@@ -35,7 +36,7 @@ class UvcCamera(QtCore.QObject):
             self.available_parameter_scan()
         else:
             print("Camera " + str(self.cam_name) + " open failed!")      # 补充
-            raise InitialError
+            #raise InitialError
             self.camera_release()
 
     def parameter_list_read_get(self):
@@ -55,24 +56,25 @@ class UvcCamera(QtCore.QObject):
                 QtTest.QTest.qWait(1)
             self._parameter_scanned_flag = 1
             if not self.parameter_list:
-                raise ParameterListError
+                #raise ParameterListError
                 self.camera_release()
+            else:
+                self.camera_parameter_set(float(self.parameter_list[0][0]),float(self.parameter_list[0][1]), 0)
 
-    def get_frame(self):
+    def frame_get(self):
         ret, frame = self.cap.read()
         if not ret:
             print("Camera " + str(self.cam_name) + " grab frame failed!")
-            raise GetFrameError
+            #raise GetFrameError
             self.camera_release()
         return frame
 
     def start_grab(self):
         self._camera_state = 2
         while self._camera_state == 2:
-            frame = self.get_frame()
+            frame = self.frame_get()
             self.sig_get_frame_finished.emit(frame)
             QtTest.QTest.qWait(int(self._sample_time))
-
 
     def stop_grab(self):
         self._camera_state = 1
@@ -82,7 +84,7 @@ class UvcCamera(QtCore.QObject):
         self.cap.release()
         if self.cap.isOpened():
             self._camera_state = -1
-            raise CameraReleaseError
+            #raise CameraReleaseError
         else:
             self._camera_state = 0
 
@@ -92,9 +94,8 @@ class UvcCamera(QtCore.QObject):
         flag3 = self.cap.set(cv2.CAP_PROP_FOURCC, format[format_id])
         if not (flag1 and flag2 and flag3):
             print("Camera " + str(self.cam_name) + " parameter set failed!")
-            raise ParameterSetError
-        print(decode_fourcc(self.cap.get(cv2.CAP_PROP_FOURCC)))  # for test
-
+            #raise ParameterSetError
+        print(utils.decode_fourcc(self.cap.get(cv2.CAP_PROP_FOURCC)))  # for test
 
     def camera_state_get(self):
         return self._camera_state
@@ -105,32 +106,19 @@ class UvcCamera(QtCore.QObject):
         return width, height
 
     def video_format_get(self):
-        video_format = decode_fourcc(self.cap.get(cv2.CAP_PROP_FOURCC))
+        video_format = utils.decode_fourcc(self.cap.get(cv2.CAP_PROP_FOURCC))
         print(video_format)
         return video_format
-
-    # only for test
-    def print_parameter(self):
-        print(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-        print(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-
+    '''
     def sample_time_set(self, sample_time):
         self._sample_time = sample_time
+    '''
 
-def decode_fourcc(cc):
-    return "".join([chr((int(cc) >> 8 * i) & 0xFF) for i in range(4)])
-
-# only for test
-
-
-def print_ok():
-    print("OK")
 
 if __name__ == '__main__':
     cam1 = UvcCamera()
     cam1.camera_init(0)
     cam1.start_grab()
-    cam1.print_parameter()
     cam1.stop_grab()
     cam1.camera_release()
     cam1.camera_init(0)
