@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-05-15T06:54:32.036Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36" etag="DEcqnFD6jcaKOIRr0IyL" version="18.0.4" type="github">
+<mxfile host="app.diagrams.net" modified="2022-05-15T06:57:09.107Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36" etag="7edvEhcH-csC11q6R-7U" version="18.0.4" type="github">
   <diagram name="Page-1" id="9361dd3d-8414-5efd-6122-117bd74ce7a7">
     <mxGraphModel dx="1422" dy="882" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1.5" pageWidth="826" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
@@ -37,8 +37,8 @@
             <mxPoint x="190" y="160" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="TpufT0unstHseazIbA1N-94" value="LoadCapture()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" vertex="1" parent="1">
-          <mxGeometry x="100" y="130" width="60" height="30" as="geometry" />
+        <mxCell id="TpufT0unstHseazIbA1N-94" value="读取旧的采集" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="60" y="130" width="130" height="30" as="geometry" />
         </mxCell>
         <mxCell id="TpufT0unstHseazIbA1N-95" value="打开文件" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=20;" vertex="1" parent="1">
           <mxGeometry x="70" y="160" width="100" height="30" as="geometry" />
@@ -122,10 +122,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="TpufT0unstHseazIbA1N-130" value="调用传感器信息" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" vertex="1" parent="1">
-          <mxGeometry x="630" y="240" width="150" height="30" as="geometry" />
+          <mxGeometry x="538.75" y="240" width="150" height="30" as="geometry" />
         </mxCell>
         <mxCell id="TpufT0unstHseazIbA1N-131" value="发送Tcp包给Unity程序" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" vertex="1" parent="1">
-          <mxGeometry x="710" y="390" width="220" height="30" as="geometry" />
+          <mxGeometry x="700" y="390" width="220" height="30" as="geometry" />
         </mxCell>
         <mxCell id="TpufT0unstHseazIbA1N-132" value="转换Json数据包" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" vertex="1" parent="1">
           <mxGeometry x="538.75" y="360" width="150" height="30" as="geometry" />
@@ -137,12 +137,12 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="TpufT0unstHseazIbA1N-134" value="&lt;span style=&quot;&quot;&gt;返回传感器信息&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=20;" vertex="1" parent="1">
-          <mxGeometry x="590" y="285" width="160" height="30" as="geometry" />
+          <mxGeometry x="540" y="285" width="160" height="30" as="geometry" />
         </mxCell>
         <mxCell id="TpufT0unstHseazIbA1N-137" value="" style="endArrow=classic;html=1;rounded=0;fontSize=20;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="710" y="430" as="sourcePoint" />
-            <mxPoint x="930" y="430" as="targetPoint" />
+            <mxPoint x="710" y="420" as="sourcePoint" />
+            <mxPoint x="920" y="420" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="TpufT0unstHseazIbA1N-138" value="" style="endArrow=classic;html=1;rounded=0;fontSize=20;entryX=0.919;entryY=1.083;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="TpufT0unstHseazIbA1N-139">
@@ -176,7 +176,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="TpufT0unstHseazIbA1N-150" value="保存" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" vertex="1" parent="1">
-          <mxGeometry x="635.63" y="470" width="150" height="30" as="geometry" />
+          <mxGeometry x="670" y="470" width="150" height="30" as="geometry" />
         </mxCell>
         <mxCell id="TpufT0unstHseazIbA1N-152" value="&lt;&lt;Control&gt;&gt;&#xa;:QSqlQuery" style="shadow=1;fillColor=#A2C4C9;strokeColor=none;fontStyle=0;fontSize=20;" vertex="1" parent="1">
           <mxGeometry x="782.5" y="50" width="147.5" height="60" as="geometry" />
@@ -191,10 +191,52 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="TpufT0unstHseazIbA1N-156" value="录入SQL数据库中" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" vertex="1" parent="1">
-          <mxGeometry x="528.75" y="510" width="191.25" height="30" as="geometry" />
+          <mxGeometry x="507.5" y="510" width="191.25" height="30" as="geometry" />
         </mxCell>
         <mxCell id="TpufT0unstHseazIbA1N-157" value="" style="fillColor=#CC4125;strokeColor=#660000;fontSize=20;" vertex="1" parent="1">
           <mxGeometry x="1168.75" y="480" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="TpufT0unstHseazIbA1N-158" value="" style="edgeStyle=none;endArrow=none;dashed=1;fontSize=20;" edge="1" parent="1">
+          <mxGeometry x="143.98784722222243" y="194.99999999999997" width="100" height="100" as="geometry">
+            <mxPoint x="204.49999999999991" y="130" as="sourcePoint" />
+            <mxPoint x="204.92" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TpufT0unstHseazIbA1N-159" value="" style="edgeStyle=none;endArrow=none;dashed=1;fontSize=20;" edge="1" parent="1">
+          <mxGeometry x="312.73784722222246" y="194.99999999999997" width="100" height="100" as="geometry">
+            <mxPoint x="373.24999999999994" y="130" as="sourcePoint" />
+            <mxPoint x="373.67" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TpufT0unstHseazIbA1N-160" value="" style="edgeStyle=none;endArrow=none;dashed=1;fontSize=20;" edge="1" parent="1">
+          <mxGeometry x="472.73784722222246" y="305" width="100" height="100" as="geometry">
+            <mxPoint x="534" y="280" as="sourcePoint" />
+            <mxPoint x="534" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TpufT0unstHseazIbA1N-161" value="" style="edgeStyle=none;endArrow=none;dashed=1;fontSize=20;" edge="1" parent="1">
+          <mxGeometry x="632.7378472222224" y="194.99999999999997" width="100" height="100" as="geometry">
+            <mxPoint x="693.2499999999999" y="130" as="sourcePoint" />
+            <mxPoint x="693.67" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TpufT0unstHseazIbA1N-162" value="" style="edgeStyle=none;endArrow=none;dashed=1;fontSize=20;" edge="1" parent="1">
+          <mxGeometry x="795.2378472222224" y="179.99999999999997" width="100" height="100" as="geometry">
+            <mxPoint x="856" y="510" as="sourcePoint" />
+            <mxPoint x="856.17" y="585" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TpufT0unstHseazIbA1N-163" value="" style="edgeStyle=none;endArrow=none;dashed=1;fontSize=20;" edge="1" parent="1">
+          <mxGeometry x="954.6178472222224" y="-200.00000000000003" width="100" height="100" as="geometry">
+            <mxPoint x="1015.38" y="130" as="sourcePoint" />
+            <mxPoint x="1012.13" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TpufT0unstHseazIbA1N-164" value="" style="edgeStyle=none;endArrow=none;dashed=1;fontSize=20;" edge="1" parent="1">
+          <mxGeometry x="1112.4878472222224" y="129.99999999999997" width="100" height="100" as="geometry">
+            <mxPoint x="1173.25" y="460" as="sourcePoint" />
+            <mxPoint x="1173.42" y="535" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
