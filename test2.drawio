@@ -1,1 +1,61 @@
-<mxfile host="app.diagrams.net" modified="2022-05-15T05:15:13.126Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36" version="18.0.4" etag="4nfOo9Tnk2JHKstRQ8ON" type="github"><diagram id="8X0J9dconU0ObrsH0KYM">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-05-15T05:26:09.730Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36" etag="kAUEixIq0r7p95TTIdnX" version="18.0.4" type="github">
+  <diagram id="8X0J9dconU0ObrsH0KYM" name="Page-1">
+    <mxGraphModel dx="813" dy="504" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="fRUq8kxO62ZYjfJcb5hk-2" value="用户" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="180" y="390" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fRUq8kxO62ZYjfJcb5hk-3" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="260" y="300" width="290" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="fRUq8kxO62ZYjfJcb5hk-4" value="机器人参数评价主体软件" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="260" y="300" width="150" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="fRUq8kxO62ZYjfJcb5hk-5" value="选择项目文件并配置" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="279" y="330" width="116" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fRUq8kxO62ZYjfJcb5hk-6" value="配置系统硬件参数" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="284" y="380" width="106" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fRUq8kxO62ZYjfJcb5hk-11" value="include" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fRUq8kxO62ZYjfJcb5hk-7" target="fRUq8kxO62ZYjfJcb5hk-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fRUq8kxO62ZYjfJcb5hk-7" value="采集任务" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="297" y="430" width="76" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fRUq8kxO62ZYjfJcb5hk-8" value="获取步态评估" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="289.5" y="480" width="91" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fRUq8kxO62ZYjfJcb5hk-9" value="设备控制" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="430" width="76" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fRUq8kxO62ZYjfJcb5hk-13" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="fRUq8kxO62ZYjfJcb5hk-2" target="fRUq8kxO62ZYjfJcb5hk-5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="190" y="380" as="sourcePoint" />
+            <mxPoint x="240" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fRUq8kxO62ZYjfJcb5hk-15" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="fRUq8kxO62ZYjfJcb5hk-2" target="fRUq8kxO62ZYjfJcb5hk-6">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="220" y="420" as="sourcePoint" />
+            <mxPoint x="289" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fRUq8kxO62ZYjfJcb5hk-16" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="fRUq8kxO62ZYjfJcb5hk-7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="410" as="sourcePoint" />
+            <mxPoint x="299" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fRUq8kxO62ZYjfJcb5hk-17" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="fRUq8kxO62ZYjfJcb5hk-8">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="410" as="sourcePoint" />
+            <mxPoint x="309" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
